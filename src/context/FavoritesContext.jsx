@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useMemo } from 'react';
+import { allProductsData } from '../data/productsData';
 
 // Shared collections catalog data so both Collections component & Favorites Modal have access to full item details
 export const collectionsData = [
@@ -112,6 +113,25 @@ export const collectionsData = [
   }
 ];
 
+// Combine all product sources for uniform lookup
+const combinedCatalog = [
+  ...collectionsData,
+  ...allProductsData.map(p => ({
+    id: p.id,
+    title: p.title,
+    subtitle: `${p.category} • Handcrafted Teak`,
+    description: p.description,
+    image: p.image,
+    pieces: p.discountPercent || 'Custom Model',
+    specs: {
+      material: 'Chittagong Teak Wood',
+      finish: 'Satin Protective Polish',
+      warranty: '10 Years Guarantee',
+      leadTime: '7 - 14 Days'
+    }
+  }))
+];
+
 const FavoritesContext = createContext();
 
 export function FavoritesProvider({ children }) {
@@ -132,9 +152,9 @@ export function FavoritesProvider({ children }) {
 
   const clearFavorites = () => setFavorites([]);
 
-  const favoritedProducts = collectionsData.filter((item) =>
-    favorites.includes(item.id)
-  );
+  const favoritedProducts = useMemo(() => {
+    return combinedCatalog.filter((item) => favorites.includes(item.id));
+  }, [favorites]);
 
   return (
     <FavoritesContext.Provider

@@ -95,7 +95,8 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header
+    <>
+      <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
           ? 'bg-[#122B2B]/95 backdrop-blur-xl py-2.5 border-b border-[#B8925A]/20 shadow-[0_4px_30px_rgba(0,0,0,0.4)]'
@@ -367,156 +368,158 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* ───── Favorites / Wishlist Modal / Drawer ───── */}
-      <AnimatePresence>
-        {isFavoritesOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-            {/* Dark Blur Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsFavoritesOpen(false)}
-              className="fixed inset-0 bg-black/80 backdrop-blur-md"
-            />
-
-            {/* Modal Dialog Card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.92, y: 20 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-2xl bg-[#122B2B] text-white rounded-3xl shadow-2xl border border-[#B8925A]/30 overflow-hidden z-10 my-auto flex flex-col max-h-[85vh]"
-            >
-              {/* Header */}
-              <div className="p-6 sm:p-7 border-b border-white/10 flex items-center justify-between bg-[#0D2020]">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#B8925A]/15 border border-[#B8925A]/30 flex items-center justify-center text-[#B8925A]">
-                    <Heart className="w-5 h-5 fill-[#B8925A]" />
-                  </div>
-                  <div>
-                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
-                      Saved Favorites
-                      <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#B8925A]/20 text-[#B8925A] font-sans border border-[#B8925A]/30">
-                        {favoritedProducts.length} items
-                      </span>
-                    </h3>
-                    <p className="text-xs text-white/60 font-light mt-0.5">
-                      Your curated personal collection of teak furniture
-                    </p>
-                  </div>
-                </div>
-
-                <button
-                  onClick={() => setIsFavoritesOpen(false)}
-                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#B8925A] hover:text-[#122B2B] text-white transition-all flex items-center justify-center border border-white/15"
-                  aria-label="Close Favorites"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-
-              {/* Body / Items List */}
-              <div className="p-6 overflow-y-auto space-y-4 flex-1">
-                {favoritedProducts.length === 0 ? (
-                  <div className="py-12 text-center flex flex-col items-center justify-center">
-                    <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/30 mb-4">
-                      <Heart className="w-8 h-8" />
-                    </div>
-                    <h4 className="text-lg font-serif font-bold text-white/90 mb-1">No Favorites Yet</h4>
-                    <p className="text-xs text-white/60 max-w-sm font-light mb-6">
-                      Click the heart emoji on any furniture piece in our collections to save it here for quick access.
-                    </p>
-                    <a
-                      href="#collections"
-                      onClick={() => setIsFavoritesOpen(false)}
-                      className="px-6 py-2.5 rounded-full bg-[#B8925A] text-[#122B2B] font-bold text-xs hover:bg-[#D4AF77] transition-all shadow-md"
-                    >
-                      Browse Collections
-                    </a>
-                  </div>
-                ) : (
-                  favoritedProducts.map((item) => (
-                    <motion.div
-                      key={item.id}
-                      layout
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-2xl bg-[#0D2020] border border-white/10 hover:border-[#B8925A]/40 transition-all"
-                    >
-                      {/* Product Thumbnail & Details */}
-                      <div className="flex items-center gap-4">
-                        <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0 border border-white/10">
-                          <img
-                            src={item.image}
-                            alt={item.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                          />
-                        </div>
-                        <div>
-                          <span className="text-[10px] uppercase tracking-wider text-[#B8925A] font-semibold">
-                            {item.pieces}
-                          </span>
-                          <h4 className="font-serif text-base font-bold text-white group-hover:text-[#B8925A] transition-colors">
-                            {item.title}
-                          </h4>
-                          <p className="text-xs text-white/60 font-light line-clamp-1 mt-0.5">
-                            {item.subtitle}
-                          </p>
-                          <p className="text-[11px] text-emerald-400 font-medium mt-1">
-                            {item.specs.material}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Action Buttons */}
-                      <div className="flex items-center gap-2 self-end sm:self-center w-full sm:w-auto justify-end pt-2 sm:pt-0 border-t sm:border-0 border-white/5">
-                        <a
-                          href="#bespoke-builder"
-                          onClick={() => setIsFavoritesOpen(false)}
-                          className="px-4 py-2 rounded-full bg-[#B8925A]/15 hover:bg-[#B8925A] text-[#B8925A] hover:text-[#122B2B] text-xs font-semibold border border-[#B8925A]/30 transition-all inline-flex items-center gap-1.5"
-                        >
-                          <span>Request Quote</span>
-                          <ExternalLink className="w-3 h-3" />
-                        </a>
-                        <button
-                          onClick={() => removeFavorite(item.id)}
-                          className="p-2 rounded-full text-white/40 hover:text-red-400 hover:bg-white/5 transition-colors"
-                          title="Remove item"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </motion.div>
-                  ))
-                )}
-              </div>
-
-              {/* Footer Actions */}
-              {favoritedProducts.length > 0 && (
-                <div className="p-5 border-t border-white/10 bg-[#0D2020] flex items-center justify-between">
-                  <button
-                    onClick={clearFavorites}
-                    className="text-xs text-white/50 hover:text-red-400 transition-colors flex items-center gap-1.5 font-medium"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                    <span>Clear All</span>
-                  </button>
-
-                  <a
-                    href="#bespoke-builder"
-                    onClick={() => setIsFavoritesOpen(false)}
-                    className="px-6 py-2.5 rounded-full bg-[#B8925A] text-[#122B2B] font-bold text-xs hover:bg-[#D4AF77] transition-all shadow-lg shadow-[#B8925A]/20"
-                  >
-                    Customize Selected Items
-                  </a>
-                </div>
-              )}
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </header>
+
+    {/* ───── Favorites / Wishlist Modal / Drawer (Rendered outside header for instant popup) ───── */}
+    <AnimatePresence>
+      {isFavoritesOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+          {/* Dark Blur Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsFavoritesOpen(false)}
+            className="fixed inset-0 bg-black/80 backdrop-blur-md"
+          />
+
+          {/* Modal Dialog Card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.92, y: 20 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            className="relative w-full max-w-2xl bg-[#122B2B] text-white rounded-3xl shadow-2xl border border-[#B8925A]/30 overflow-hidden z-10 my-auto flex flex-col max-h-[85vh]"
+          >
+            {/* Header */}
+            <div className="p-6 sm:p-7 border-b border-white/10 flex items-center justify-between bg-[#0D2020]">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#B8925A]/15 border border-[#B8925A]/30 flex items-center justify-center text-[#B8925A]">
+                  <Heart className="w-5 h-5 fill-[#B8925A]" />
+                </div>
+                <div>
+                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
+                    Saved Favorites
+                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#B8925A]/20 text-[#B8925A] font-sans border border-[#B8925A]/30">
+                      {favoritedProducts.length} items
+                    </span>
+                  </h3>
+                  <p className="text-xs text-white/60 font-light mt-0.5">
+                    Your curated personal collection of teak furniture
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setIsFavoritesOpen(false)}
+                className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#B8925A] hover:text-[#122B2B] text-white transition-all flex items-center justify-center border border-white/15"
+                aria-label="Close Favorites"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Body / Items List */}
+            <div className="p-6 overflow-y-auto space-y-4 flex-1">
+              {favoritedProducts.length === 0 ? (
+                <div className="py-12 text-center flex flex-col items-center justify-center">
+                  <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/30 mb-4">
+                    <Heart className="w-8 h-8" />
+                  </div>
+                  <h4 className="text-lg font-serif font-bold text-white/90 mb-1">No Favorites Yet</h4>
+                  <p className="text-xs text-white/60 max-w-sm font-light mb-6">
+                    Click the heart emoji on any furniture piece in our collections to save it here for quick access.
+                  </p>
+                  <Link
+                    to="/collections"
+                    onClick={() => setIsFavoritesOpen(false)}
+                    className="px-6 py-2.5 rounded-full bg-[#B8925A] text-[#122B2B] font-bold text-xs hover:bg-[#D4AF77] transition-all shadow-md"
+                  >
+                    Browse Collections
+                  </Link>
+                </div>
+              ) : (
+                favoritedProducts.map((item) => (
+                  <motion.div
+                    key={item.id}
+                    layout
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-2xl bg-[#0D2020] border border-white/10 hover:border-[#B8925A]/40 transition-all"
+                  >
+                    {/* Product Thumbnail & Details */}
+                    <div className="flex items-center gap-4">
+                      <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0 border border-white/10">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                      <div>
+                        <span className="text-[10px] uppercase tracking-wider text-[#B8925A] font-semibold">
+                          {item.pieces}
+                        </span>
+                        <h4 className="font-serif text-base font-bold text-white group-hover:text-[#B8925A] transition-colors">
+                          {item.title}
+                        </h4>
+                        <p className="text-xs text-white/60 font-light line-clamp-1 mt-0.5">
+                          {item.subtitle}
+                        </p>
+                        <p className="text-[11px] text-emerald-400 font-medium mt-1">
+                          {item.specs.material}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex items-center gap-2 self-end sm:self-center w-full sm:w-auto justify-end pt-2 sm:pt-0 border-t sm:border-0 border-white/5">
+                      <Link
+                        to="/#bespoke-builder"
+                        onClick={() => setIsFavoritesOpen(false)}
+                        className="px-4 py-2 rounded-full bg-[#B8925A]/15 hover:bg-[#B8925A] text-[#B8925A] hover:text-[#122B2B] text-xs font-semibold border border-[#B8925A]/30 transition-all inline-flex items-center gap-1.5"
+                      >
+                        <span>Request Quote</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </Link>
+                      <button
+                        onClick={() => removeFavorite(item.id)}
+                        className="p-2 rounded-full text-white/40 hover:text-red-400 hover:bg-white/5 transition-colors"
+                        title="Remove item"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </motion.div>
+                ))
+              )}
+            </div>
+
+            {/* Footer Actions */}
+            {favoritedProducts.length > 0 && (
+              <div className="p-5 border-t border-white/10 bg-[#0D2020] flex items-center justify-between">
+                <button
+                  onClick={clearFavorites}
+                  className="text-xs text-white/50 hover:text-red-400 transition-colors flex items-center gap-1.5 font-medium"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                  <span>Clear All</span>
+                </button>
+
+                <Link
+                  to="/#bespoke-builder"
+                  onClick={() => setIsFavoritesOpen(false)}
+                  className="px-6 py-2.5 rounded-full bg-[#B8925A] text-[#122B2B] font-bold text-xs hover:bg-[#D4AF77] transition-all shadow-lg shadow-[#B8925A]/20"
+                >
+                  Customize Selected Items
+                </Link>
+              </div>
+            )}
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+    </>
   );
 }
