@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --color-charcoal-teal: #122B2B;
+  --color-warm-ivory: #F5EFE6;
+  --color-muted-gold: #B8925A;
+  --color-deep-brown: #3A2A1E;
+  --color-wood-tan: #C89B6D;
+  --color-charcoal-dark: #0A1919;
+  --color-gold-light: #D4AF77;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: #F5EFE6;
+    color: #3A2A1E;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: var(--font-serif);
+  }
+}
+
+/* Custom Utilities & Glassmorphism */
+.glass-nav {
+  background: rgba(18, 43, 43, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #D4AF77 0%, #B8925A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border-glow {
+  box-shadow: 0 0 15px rgba(184, 146, 90, 0.15);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #122B2B;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #B8925A;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C89B6D;
+}
