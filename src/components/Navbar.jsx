@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Heart, ShoppingBag, Phone, Menu, X, Sparkles, Trash2, ExternalLink } from 'lucide-react';
 import { useFavorites } from '../context/FavoritesContext';
 
 /* ── Navigation links config ─────────────────────────────────────────────────── */
 const navLinks = [
-  { id: 'home',       label: 'Home',            href: '#' },
-  { id: 'collections',label: 'Collections',     href: '#collections' },
-  { id: 'bespoke',    label: 'Bespoke Builder', href: '#bespoke-builder', accent: true },
+  { id: 'home',       label: 'Home',            href: '/' },
+  { id: 'collections',label: 'Collections',     href: '/collections' },
+  { id: 'bespoke',    label: 'Bespoke Builder', href: '/#bespoke-builder', accent: true },
 ];
 
 /* ── Custom SVG Logo Icon (Royal Crown / Crest) ──────────────────────────────── */
@@ -106,7 +107,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-6">
 
           {/* ─── LEFT: Brand Logo + Name ─── */}
-          <a href="#" className="flex items-center gap-3 group shrink-0">
+          <Link to="/" className="flex items-center gap-3 group shrink-0">
             {/* Animated logo wrapper */}
             <motion.div
               className="relative"
@@ -129,7 +130,7 @@ export default function Navbar() {
                 Furniture Mart
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* ─── CENTER: Navigation Links with animated hover pill ─── */}
           <nav
@@ -137,9 +138,9 @@ export default function Navbar() {
             onMouseLeave={() => setHoveredLink(null)}
           >
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.id}
-                href={link.href}
+                to={link.href}
                 className="relative px-4 py-2 text-xs font-medium uppercase tracking-[0.12em] transition-colors duration-200 rounded-full"
                 onMouseEnter={() => setHoveredLink(link.id)}
                 style={{
@@ -176,7 +177,7 @@ export default function Navbar() {
                 )}
 
                 <span className="relative z-10">{link.label}</span>
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -319,13 +320,10 @@ export default function Navbar() {
           >
             <div className="px-6 py-7 space-y-1">
               {navLinks.map((link, i) => (
-                <motion.a
+                <Link
                   key={link.id}
-                  href={link.href}
+                  to={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.06, duration: 0.3, ease: 'easeOut' }}
                   className={`block py-3 px-4 rounded-xl text-base font-medium transition-all duration-200 ${
                     link.accent
                       ? 'text-[#B8925A] font-semibold bg-[#B8925A]/8 hover:bg-[#B8925A]/15'
@@ -338,7 +336,7 @@ export default function Navbar() {
                     )}
                     {link.label}
                   </span>
-                </motion.a>
+                </Link>
               ))}
 
               {/* Mobile utilities row */}

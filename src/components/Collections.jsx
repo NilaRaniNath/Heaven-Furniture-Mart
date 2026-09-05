@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, Sparkles, X, Eye, Check, ChevronRight, Layers, ShieldCheck, Heart } from 'lucide-react';
 import { useMotionConfig } from '../hooks/useMotionConfig';
@@ -95,8 +96,19 @@ export default function Collections() {
             Explore our signature range of solid wood creations. Designed for elegance, handcrafted for longevity, and tailored to fit your lifestyle seamlessly.
           </p>
 
+          {/* Direct Button to Full Collections Page */}
+          <div className="mt-5">
+            <Link
+              to="/collections"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#B8925A] text-[#122B2B] text-xs font-bold shadow-md hover:bg-[#122B2B] hover:text-[#B8925A] transition-all duration-300 group"
+            >
+              <span>View Full Products Catalog</span>
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
           {/* Interactive Filter Category Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-8 p-1.5 rounded-full bg-white/70 backdrop-blur-md border border-[#3A2A1E]/10 shadow-sm">
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-6 p-1.5 rounded-full bg-white/70 backdrop-blur-md border border-[#3A2A1E]/10 shadow-sm">
             {categoryTabs.map(tab => (
               <button
                 key={tab.id}
