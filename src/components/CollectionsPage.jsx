@@ -135,10 +135,24 @@ export default function CollectionsPage() {
   }, [filteredProducts, currentPage]);
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] text-[#333333] pt-24 pb-20 font-sans selection:bg-[#B8925A] selection:text-white">
+    <motion.div
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
+      className="min-h-screen bg-[#F5EFE6] text-[#3A2A1E] pt-24 pb-20 font-sans selection:bg-[#B8925A] selection:text-white relative overflow-hidden"
+    >
+      {/* Background Subtle Warm Decorative Glow Accents */}
+      <div className="absolute top-20 right-0 w-96 h-96 bg-[#B8925A]/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-20 left-0 w-96 h-96 bg-[#122B2B]/5 rounded-full blur-3xl pointer-events-none"></div>
+
       {/* ── BREADCRUMB HEADER ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2">
-        <nav className="flex items-center gap-2 text-xs text-gray-500 font-medium tracking-wide">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.1 }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2"
+      >
+        <nav className="flex items-center gap-2 text-xs text-[#3A2A1E]/70 font-medium tracking-wide">
           <a href="/" className="hover:text-[#122B2B] transition-colors">Home</a>
           <span>/</span>
           <span className="text-[#122B2B] font-semibold">Collection</span>
@@ -146,10 +160,15 @@ export default function CollectionsPage() {
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#122B2B] mt-2 uppercase font-serif">
           All Products
         </h1>
-      </div>
+      </motion.div>
 
       {/* ── TOP CATEGORY THUMBNAIL CARDS (Matching Reference Image) ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-6">
+      <motion.div
+        initial={{ opacity: 0, y: 25 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.75, delay: 0.2 }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-6 relative z-10"
+      >
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
           {collectionCategories.map((cat) => (
             <button
@@ -158,10 +177,10 @@ export default function CollectionsPage() {
                 setSelectedCategory(cat.id);
                 setCurrentPage(1);
               }}
-              className={`group flex flex-col items-center p-3 rounded-2xl bg-white border transition-all duration-300 shadow-sm hover:shadow-md ${
+              className={`group flex flex-col items-center p-3 rounded-2xl bg-white/90 backdrop-blur-md border transition-all duration-300 shadow-sm hover:shadow-md ${
                 selectedCategory === cat.id 
                   ? 'border-[#122B2B] ring-2 ring-[#122B2B]/10 scale-[1.02]' 
-                  : 'border-gray-200 hover:border-gray-300'
+                  : 'border-gray-200 hover:border-[#B8925A]/40'
               }`}
             >
               <div className="w-full h-28 sm:h-32 rounded-xl overflow-hidden mb-2.5 bg-gray-100 relative">
@@ -177,7 +196,7 @@ export default function CollectionsPage() {
             </button>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
         
@@ -586,6 +605,6 @@ export default function CollectionsPage() {
           </div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }

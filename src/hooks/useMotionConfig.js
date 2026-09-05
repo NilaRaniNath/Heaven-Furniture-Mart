@@ -25,7 +25,7 @@ export function useMotionConfig() {
       opacity: 1,
       y: 0,
       transition: {
-        duration: prefersReducedMotion ? 0.2 : 0.55,
+        duration: prefersReducedMotion ? 0.2 : 0.85, // Increased by 0.3s for smooth elegant feel
         ease: 'easeOut',
       },
     },
@@ -36,8 +36,8 @@ export function useMotionConfig() {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: prefersReducedMotion ? 0 : 0.08,
-        delayChildren: 0.05,
+        staggerChildren: prefersReducedMotion ? 0 : 0.12,
+        delayChildren: 0.08,
       },
     },
   };
@@ -50,7 +50,7 @@ export function useMotionConfig() {
       opacity: 1,
       y: 0,
       transition: {
-        duration: prefersReducedMotion ? 0.15 : 0.5,
+        duration: prefersReducedMotion ? 0.15 : 0.8, // Increased by 0.3s
         ease: 'easeOut',
       },
     },
@@ -65,19 +65,19 @@ export function useMotionConfig() {
       opacity: 1,
       y: 0,
       transition: {
-        duration: prefersReducedMotion ? 0.15 : 0.35,
+        duration: prefersReducedMotion ? 0.15 : 0.65, // Increased by 0.3s
         ease: 'easeOut',
       },
     },
     exit: prefersReducedMotion
       ? { opacity: 0 }
-      : { opacity: 0, y: -8, transition: { duration: 0.2, ease: 'easeIn' } },
+      : { opacity: 0, y: -8, transition: { duration: 0.35, ease: 'easeIn' } },
   };
 
   // Subtle scale hover for cards (pass to whileHover)
   const cardHover = prefersReducedMotion
     ? {}
-    : { scale: 1.03, transition: { duration: 0.2, ease: 'easeOut' } };
+    : { scale: 1.03, transition: { duration: 0.35, ease: 'easeOut' } };
 
   return {
     sectionVariants,

@@ -12,7 +12,7 @@ export default function Hero() {
       opacity: 1, 
       scale: 1, 
       transition: { 
-        duration: prefersReducedMotion ? 0 : 1.2, 
+        duration: prefersReducedMotion ? 0 : 1.5, // Increased by 0.3s (from 1.2s)
         ease: 'easeOut' 
       } 
     }
