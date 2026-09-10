@@ -10,14 +10,14 @@ export default function Footer() {
 
   return (
     <motion.footer 
-      className="bg-[#0A1919] text-white/80 pt-16 pb-12 border-t border-white/10"
+      className="bg-[#0A1919] text-white/80 pt-12 sm:pt-16 pb-8 sm:pb-12 border-t border-white/10"
       variants={footerVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.25 }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 mb-10 sm:mb-12">
           {/* Brand Col */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
@@ -40,10 +40,10 @@ export default function Footer() {
 
           {/* Contact Details */}
           <div>
-            <h4 className="font-serif text-sm font-semibold text-white uppercase tracking-wider mb-4 border-b border-[#B8925A]/30 pb-2">
+            <h4 className="font-serif text-sm font-semibold text-white uppercase tracking-wider mb-3 sm:mb-4 border-b border-[#B8925A]/30 pb-2">
               Atelier & Showroom
             </h4>
-            <ul className="space-y-3 text-xs text-white/70 font-light">
+            <ul className="space-y-2.5 sm:space-y-3 text-xs text-white/70 font-light">
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#B8925A] flex-shrink-0 mt-0.5" />
                 <span>Agrabad Access Road, Chattogram, Bangladesh</span>
@@ -76,7 +76,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-serif text-sm font-semibold text-white uppercase tracking-wider mb-4 border-b border-[#B8925A]/30 pb-2">
+            <h4 className="font-serif text-sm font-semibold text-white uppercase tracking-wider mb-3 sm:mb-4 border-b border-[#B8925A]/30 pb-2">
               Navigation
             </h4>
             <ul className="space-y-2 text-xs text-white/70 font-light">
@@ -105,10 +105,10 @@ export default function Footer() {
 
           {/* Social Links & Hours */}
           <div>
-            <h4 className="font-serif text-sm font-semibold text-white uppercase tracking-wider mb-4 border-b border-[#B8925A]/30 pb-2">
+            <h4 className="font-serif text-sm font-semibold text-white uppercase tracking-wider mb-3 sm:mb-4 border-b border-[#B8925A]/30 pb-2">
               Connect With Us
             </h4>
-            <p className="text-xs text-white/60 mb-4 font-light">
+            <p className="text-xs text-white/60 mb-3 sm:mb-4 font-light">
               Follow our atelier workshop highlights, new timber arrivals, and customer home reveals.
             </p>
             <div className="flex items-center gap-3">
@@ -163,7 +163,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom copyright line */}
-        <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-[11px] text-white/40 gap-4">
+        <div className="pt-6 sm:pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-[11px] text-white/40 gap-3 sm:gap-4 text-center sm:text-left">
           <p>© {new Date().getFullYear()} Heaven Furniture Mart. All rights reserved. Agrabad Access Road, Chattogram.</p>
           <p className="font-light">Crafted for Luxury Bespoke Living</p>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Sparkles, X, Eye, Check, ChevronRight, Layers, ShieldCheck, Heart } from 'lucide-react';
+import { ArrowUpRight, Sparkles, X, ChevronRight, Heart } from 'lucide-react';
 import { useMotionConfig } from '../hooks/useMotionConfig';
 import { useFavorites, collectionsData } from '../context/FavoritesContext';
 
@@ -107,13 +107,13 @@ export default function Collections() {
             </Link>
           </div>
 
-          {/* Interactive Filter Category Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-6 p-1.5 rounded-full bg-white/70 backdrop-blur-md border border-[#3A2A1E]/10 shadow-sm">
+          {/* Interactive Filter Category Tabs - Horizontally Scrollable on Mobile */}
+          <div className="w-full max-w-full overflow-x-auto no-scrollbar py-2 px-1 mt-6 flex sm:flex-wrap items-center justify-start sm:justify-center gap-2 rounded-2xl sm:rounded-full bg-white/70 backdrop-blur-md border border-[#3A2A1E]/10 shadow-sm">
             {categoryTabs.map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-300 ${
+                className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-semibold tracking-wide whitespace-nowrap transition-all duration-300 shrink-0 ${
                   activeTab === tab.id
                     ? 'bg-[#122B2B] text-white shadow-md shadow-[#122B2B]/20 scale-105'
                     : 'text-[#3A2A1E]/70 hover:text-[#122B2B] hover:bg-[#122B2B]/5'
@@ -141,17 +141,17 @@ export default function Collections() {
                 viewport={{ once: true, amount: 0.25 }}
                 whileHover={cardHover}
                 onClick={() => openQuickView(collectionsData[0])}
-                className="group relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#E65100] via-[#F57C00] to-[#E65100] text-white shadow-xl min-h-[320px] sm:min-h-[360px] p-8 flex flex-col justify-between cursor-pointer border border-white/20 transition-shadow duration-300 hover:shadow-2xl"
+                className="group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-br from-[#E65100] via-[#F57C00] to-[#E65100] text-white shadow-xl min-h-[360px] sm:min-h-[360px] p-5 sm:p-8 flex flex-col justify-between cursor-pointer border border-white/20 transition-shadow duration-300 hover:shadow-2xl"
               >
                 {/* Background Glow Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/30 z-10"></div>
                 
                 {/* Title & Tag */}
                 <div className="relative z-20 max-w-sm">
-                  <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[11px] font-semibold tracking-wider text-white mb-3">
+                  <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[10px] sm:text-[11px] font-semibold tracking-wider text-white mb-2 sm:mb-3">
                     {collectionsData[0].pieces}
                   </span>
-                  <h3 className="font-serif text-3xl sm:text-4xl font-bold leading-tight text-white group-hover:text-[#F5EFE6] transition-colors">
+                  <h3 className="font-serif text-2xl sm:text-4xl font-bold leading-tight text-white group-hover:text-[#F5EFE6] transition-colors">
                     {collectionsData[0].title}
                   </h3>
                   <p className="text-xs text-white/80 mt-1 font-light">
@@ -160,7 +160,7 @@ export default function Collections() {
                 </div>
 
                 {/* Floating Image Asset */}
-                <div className="absolute right-2 bottom-2 sm:right-6 sm:bottom-4 w-52 sm:w-72 h-44 sm:h-56 z-10 overflow-hidden rounded-2xl shadow-lg border border-white/20 group-hover:scale-105 transition-transform duration-700">
+                <div className="relative sm:absolute right-0 sm:right-6 bottom-0 sm:bottom-4 w-full sm:w-72 h-44 sm:h-56 my-3 sm:my-0 z-10 overflow-hidden rounded-xl sm:rounded-2xl shadow-lg border border-white/20 group-hover:scale-105 transition-transform duration-700">
                   <img
                     src={collectionsData[0].image}
                     alt={collectionsData[0].title}
@@ -169,10 +169,10 @@ export default function Collections() {
                 </div>
 
                 {/* Favorite & Quick Action */}
-                <div className="relative z-20 flex items-center justify-between mt-auto pt-6">
+                <div className="relative z-20 flex items-center justify-between mt-auto pt-4 sm:pt-6">
                   <button 
                     onClick={(e) => handleToggleFavorite(e, collectionsData[0].id)}
-                    className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-[#E65100] transition-all"
+                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-[#E65100] transition-all"
                   >
                     <Heart className={`w-4 h-4 ${favorites.includes(collectionsData[0].id) ? 'fill-current text-red-500' : ''}`} />
                   </button>
@@ -189,16 +189,16 @@ export default function Collections() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.25 }}
                 onClick={() => openQuickView(collectionsData[1])}
-                className="group relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#D84315] via-[#E65100] to-[#F57C00] text-white shadow-xl min-h-[300px] sm:min-h-[320px] p-8 flex flex-col justify-between cursor-pointer border border-white/20 transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]"
+                className="group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-r from-[#D84315] via-[#E65100] to-[#F57C00] text-white shadow-xl min-h-[340px] sm:min-h-[320px] p-5 sm:p-8 flex flex-col justify-between cursor-pointer border border-white/20 transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]"
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/20 z-10"></div>
                 
                 {/* Title */}
                 <div className="relative z-20 max-w-xs">
-                  <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[11px] font-semibold tracking-wider text-white mb-2">
+                  <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[10px] sm:text-[11px] font-semibold tracking-wider text-white mb-2">
                     {collectionsData[1].pieces}
                   </span>
-                  <h3 className="font-serif text-3xl sm:text-4xl font-bold text-white">
+                  <h3 className="font-serif text-2xl sm:text-4xl font-bold text-white">
                     {collectionsData[1].title}
                   </h3>
                   <p className="text-xs text-white/80 font-light mt-1">
@@ -207,7 +207,7 @@ export default function Collections() {
                 </div>
 
                 {/* Overlapping Sofa Image */}
-                <div className="absolute right-4 bottom-4 w-48 sm:w-64 h-36 sm:h-44 z-10 rounded-2xl overflow-hidden shadow-xl border border-white/20 group-hover:scale-105 transition-transform duration-700">
+                <div className="relative sm:absolute right-0 sm:right-4 bottom-0 sm:bottom-4 w-full sm:w-64 h-40 sm:h-44 my-3 sm:my-0 z-10 rounded-xl sm:rounded-2xl overflow-hidden shadow-xl border border-white/20 group-hover:scale-105 transition-transform duration-700">
                   <img
                     src={collectionsData[1].image}
                     alt={collectionsData[1].title}
@@ -219,7 +219,7 @@ export default function Collections() {
                 <div className="relative z-20 flex items-center justify-between pt-4">
                   <button 
                     onClick={(e) => handleToggleFavorite(e, collectionsData[1].id)}
-                    className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-[#E65100] transition-all"
+                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-[#E65100] transition-all"
                   >
                     <Heart className={`w-4 h-4 ${favorites.includes(collectionsData[1].id) ? 'fill-current text-red-500' : ''}`} />
                   </button>
@@ -239,13 +239,13 @@ export default function Collections() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.25 }}
                 onClick={() => openQuickView(collectionsData[2])}
-                className="group relative rounded-3xl overflow-hidden bg-gradient-to-b from-[#E65100] via-[#EF6C00] to-[#BF360C] text-white shadow-xl min-h-[500px] lg:h-full p-8 flex flex-col justify-between cursor-pointer border border-white/20 transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]"
+                className="group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-b from-[#E65100] via-[#EF6C00] to-[#BF360C] text-white shadow-xl min-h-[480px] lg:h-full p-5 sm:p-8 flex flex-col justify-between cursor-pointer border border-white/20 transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]"
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/80 z-10"></div>
 
                 {/* Top Pill Button matching reference image: "Explore more >>" */}
                 <div className="relative z-20 flex items-center justify-between">
-                  <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[11px] font-semibold tracking-wider text-white">
+                  <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[10px] sm:text-[11px] font-semibold tracking-wider text-white">
                     Featured Masterpiece
                   </span>
                   <button 
@@ -253,7 +253,7 @@ export default function Collections() {
                       e.stopPropagation();
                       openQuickView(collectionsData[2]);
                     }}
-                    className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-white/95 text-[#E65100] hover:bg-white text-xs font-bold shadow-lg hover:scale-105 transition-all"
+                    className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-white/95 text-[#E65100] hover:bg-white text-xs font-bold shadow-lg hover:scale-105 transition-all"
                   >
                     <span>Explore more</span>
                     <span className="text-sm font-extrabold">»</span>
@@ -261,21 +261,21 @@ export default function Collections() {
                 </div>
 
                 {/* Main Image Asset */}
-                <div className="relative z-10 my-6 w-full h-64 sm:h-80 rounded-2xl overflow-hidden shadow-2xl border border-white/20 group-hover:scale-105 transition-transform duration-700">
+                <div className="relative z-10 my-4 sm:my-6 w-full h-52 sm:h-80 rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border border-white/20 group-hover:scale-105 transition-transform duration-700">
                   <img
                     src={collectionsData[2].image}
                     alt={collectionsData[2].title}
                     className="w-full h-full object-cover object-center"
                   />
                   {/* Subtle Floating Hotspot */}
-                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] text-white font-medium border border-white/20">
+                  <div className="absolute top-3 left-3 sm:top-4 sm:left-4 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[9px] sm:text-[10px] text-white font-medium border border-white/20">
                     Single-Slab Teak Wood
                   </div>
                 </div>
 
                 {/* Bottom Details */}
                 <div className="relative z-20 pt-2">
-                  <h3 className="font-serif text-3xl font-bold text-white mb-2">
+                  <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-2">
                     {collectionsData[2].title}
                   </h3>
                   <p className="text-xs text-white/80 font-light leading-relaxed mb-4">
@@ -286,7 +286,7 @@ export default function Collections() {
                     <span className="text-xs text-white/90 font-medium">
                       {collectionsData[2].pieces}
                     </span>
-                    <div className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white group-hover:bg-white group-hover:text-[#E65100] transition-all">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white group-hover:bg-white group-hover:text-[#E65100] transition-all">
                       <ArrowUpRight className="w-4 h-4" />
                     </div>
                   </div>
@@ -298,7 +298,7 @@ export default function Collections() {
         ) : null}
 
         {/* Regular Filtered Grid View for Category Selection or Additional Items */}
-        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ${activeTab === 'all' ? 'mt-8' : ''}`}>
+        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 ${activeTab === 'all' ? 'mt-8' : ''}`}>
           {(activeTab === 'all' ? collectionsData.slice(3) : filteredItems).map((item, idx) => (
             <motion.div
               key={item.id}
@@ -308,7 +308,7 @@ export default function Collections() {
               viewport={{ once: true, amount: 0.25 }}
               whileHover={cardHover}
               onClick={() => openQuickView(item)}
-              className="group relative rounded-3xl overflow-hidden bg-[#122B2B] text-white shadow-xl min-h-[380px] flex flex-col justify-between cursor-pointer border border-[#B8925A]/20 transition-shadow duration-300 hover:shadow-2xl"
+              className="group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#122B2B] text-white shadow-xl min-h-[360px] sm:min-h-[380px] flex flex-col justify-between cursor-pointer border border-[#B8925A]/20 transition-shadow duration-300 hover:shadow-2xl"
             >
               {/* Image with zoom */}
               <div className="absolute inset-0 overflow-hidden">
@@ -321,8 +321,8 @@ export default function Collections() {
               </div>
 
               {/* Top Badge */}
-              <div className="relative z-10 p-6 flex items-center justify-between">
-                <span className="inline-block px-3 py-1 rounded-full bg-[#122B2B]/80 backdrop-blur-md text-[11px] font-semibold text-[#B8925A] border border-[#B8925A]/30">
+              <div className="relative z-10 p-4 sm:p-6 flex items-center justify-between">
+                <span className="inline-block px-3 py-1 rounded-full bg-[#122B2B]/80 backdrop-blur-md text-[10px] sm:text-[11px] font-semibold text-[#B8925A] border border-[#B8925A]/30">
                   {item.pieces}
                 </span>
                 <button
@@ -334,15 +334,15 @@ export default function Collections() {
               </div>
 
               {/* Bottom Content */}
-              <div className="relative z-10 p-6 flex flex-col justify-end">
-                <p className="text-xs uppercase tracking-widest text-[#B8925A] font-medium mb-1">
+              <div className="relative z-10 p-4 sm:p-6 flex flex-col justify-end">
+                <p className="text-[10px] sm:text-xs uppercase tracking-widest text-[#B8925A] font-medium mb-1">
                   {item.subtitle}
                 </p>
                 <div className="flex items-center justify-between gap-2">
-                  <h3 className="font-serif text-2xl font-bold text-white group-hover:text-[#B8925A] transition-colors">
+                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-white group-hover:text-[#B8925A] transition-colors">
                     {item.title}
                   </h3>
-                  <div className="w-9 h-9 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:bg-[#B8925A] group-hover:text-[#122B2B] transition-all shrink-0">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:bg-[#B8925A] group-hover:text-[#122B2B] transition-all shrink-0">
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </div>
@@ -359,7 +359,7 @@ export default function Collections() {
       {/* Interactive Quick View Modal */}
       <AnimatePresence>
         {selectedProduct && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -375,38 +375,39 @@ export default function Collections() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-4xl bg-[#122B2B] text-white rounded-3xl shadow-2xl border border-[#B8925A]/30 overflow-hidden z-10 my-auto"
+              className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#122B2B] text-white rounded-2xl sm:rounded-3xl shadow-2xl border border-[#B8925A]/30 z-10 my-auto"
             >
               {/* Close Button */}
               <button
                 onClick={() => setSelectedProduct(null)}
-                className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/40 hover:bg-[#B8925A] hover:text-[#122B2B] text-white transition-all flex items-center justify-center border border-white/20"
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-[#B8925A] hover:text-[#122B2B] text-white transition-all flex items-center justify-center border border-white/20"
+                aria-label="Close"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
 
               <div className="grid grid-cols-1 md:grid-cols-2">
                 {/* Left Gallery Display */}
-                <div className="p-6 sm:p-8 bg-[#0D2020] flex flex-col justify-between">
-                  <div className="relative h-64 sm:h-80 rounded-2xl overflow-hidden border border-white/10 shadow-lg mb-4">
+                <div className="p-4 sm:p-8 bg-[#0D2020] flex flex-col justify-between">
+                  <div className="relative h-56 sm:h-80 rounded-xl sm:rounded-2xl overflow-hidden border border-white/10 shadow-lg mb-4">
                     <img
                       src={activeGalleryImg}
                       alt={selectedProduct.title}
                       className="w-full h-full object-cover object-center"
                     />
-                    <div className="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[11px] text-[#B8925A] border border-[#B8925A]/30">
+                    <div className="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] sm:text-[11px] text-[#B8925A] border border-[#B8925A]/30">
                       High-Res Asset Preview
                     </div>
                   </div>
 
                   {/* Thumbnails */}
                   {selectedProduct.gallery && selectedProduct.gallery.length > 1 && (
-                    <div className="flex items-center gap-3 overflow-x-auto pb-2">
+                    <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-2">
                       {selectedProduct.gallery.map((imgUrl, i) => (
                         <button
                           key={i}
                           onClick={() => setActiveGalleryImg(imgUrl)}
-                          className={`w-16 h-16 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${
+                          className={`w-14 h-14 sm:w-16 sm:h-16 rounded-lg sm:rounded-xl overflow-hidden border-2 transition-all shrink-0 ${
                             activeGalleryImg === imgUrl ? 'border-[#B8925A] scale-105' : 'border-white/20 opacity-60 hover:opacity-100'
                           }`}
                         >
@@ -418,23 +419,23 @@ export default function Collections() {
                 </div>
 
                 {/* Right Product Info */}
-                <div className="p-6 sm:p-8 flex flex-col justify-between">
+                <div className="p-4 sm:p-8 flex flex-col justify-between">
                   <div>
-                    <span className="inline-block px-3 py-1 rounded-full bg-[#B8925A]/20 text-[#B8925A] text-xs font-semibold tracking-wider uppercase mb-3 border border-[#B8925A]/30">
+                    <span className="inline-block px-3 py-1 rounded-full bg-[#B8925A]/20 text-[#B8925A] text-[10px] sm:text-xs font-semibold tracking-wider uppercase mb-2 sm:mb-3 border border-[#B8925A]/30">
                       {selectedProduct.pieces}
                     </span>
-                    <h3 className="font-serif text-3xl font-bold text-white mb-2">
+                    <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2">
                       {selectedProduct.title}
                     </h3>
-                    <p className="text-xs uppercase tracking-widest text-[#B8925A] font-medium mb-4">
+                    <p className="text-[10px] sm:text-xs uppercase tracking-widest text-[#B8925A] font-medium mb-3 sm:mb-4">
                       {selectedProduct.subtitle}
                     </p>
-                    <p className="text-sm text-white/80 font-light leading-relaxed mb-6">
+                    <p className="text-xs sm:text-sm text-white/80 font-light leading-relaxed mb-4 sm:mb-6">
                       {selectedProduct.description}
                     </p>
 
                     {/* Specifications Grid */}
-                    <div className="space-y-2.5 mb-6 text-xs text-white/90 border-t border-b border-white/10 py-4">
+                    <div className="space-y-2 mb-5 sm:mb-6 text-xs text-white/90 border-t border-b border-white/10 py-3 sm:py-4">
                       <div className="flex justify-between">
                         <span className="text-white/50">Primary Material:</span>
                         <span className="font-medium text-[#B8925A]">{selectedProduct.specs.material}</span>
@@ -459,7 +460,7 @@ export default function Collections() {
                     <a
                       href="#bespoke-builder"
                       onClick={() => setSelectedProduct(null)}
-                      className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#B8925A] text-[#122B2B] font-bold text-sm hover:bg-[#D4AF77] transition-all shadow-lg shadow-[#B8925A]/20"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-6 sm:py-3.5 rounded-full bg-[#B8925A] text-[#122B2B] font-bold text-xs sm:text-sm hover:bg-[#D4AF77] transition-all shadow-lg shadow-[#B8925A]/20 text-center"
                     >
                       <span>Customize This Design</span>
                       <ChevronRight className="w-4 h-4" />

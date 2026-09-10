@@ -130,22 +130,9 @@ export default function ChatWidget() {
             whileTap={{ scale: 0.9 }}
             onClick={() => setOpen(true)}
             aria-label="Open chat"
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] w-12 h-12 sm:w-14 sm:h-14 rounded-full border-0 text-white cursor-pointer flex items-center justify-center shadow-[0_4px_20px_rgba(184,146,90,0.45)]"
             style={{
-              position: "fixed",
-              bottom: 24,
-              right: 24,
-              zIndex: 9999,
-              width: 56,
-              height: 56,
-              borderRadius: "50%",
-              border: "none",
               backgroundColor: colors.gold,
-              color: "#fff",
-              cursor: "pointer",
-              boxShadow: "0 4px 20px rgba(184,146,90,0.45)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
             }}
           >
             <ChatIcon />
@@ -162,18 +149,11 @@ export default function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] rounded-2xl overflow-hidden flex flex-col shadow-[0_12px_40px_rgba(0,0,0,0.25)] border border-[#B8925A]/30"
             style={{
-              position: "fixed",
-              bottom: 24,
-              right: 24,
-              zIndex: 9999,
-              width: 360,
-              height: 520,
-              borderRadius: 16,
-              overflow: "hidden",
-              display: "flex",
-              flexDirection: "column",
-              boxShadow: "0 12px 40px rgba(0,0,0,0.25)",
+              width: "calc(100vw - 32px)",
+              maxWidth: 360,
+              height: "min(520px, calc(100vh - 100px))",
               fontFamily: "'Inter', sans-serif",
             }}
           >

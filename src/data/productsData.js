@@ -85,7 +85,7 @@ export const allProductsData = [
     rating: 4.9,
     reviewsCount: 31,
     isNew: true,
-    isOnSale: font => true,
+    isOnSale: true,
     isStock: true,
     color: 'Navy',
     colorHex: '#1B2A47',

@@ -25,7 +25,7 @@ export default function Hero() {
         variants={heroVariants}
         initial="hidden"
         animate="visible"
-        className="relative w-full min-h-[90vh] lg:min-h-screen flex items-center justify-start overflow-hidden pt-28 pb-16"
+        className="relative w-full min-h-[85vh] sm:min-h-[90vh] lg:min-h-screen flex items-center justify-start overflow-hidden pt-24 sm:pt-28 pb-12 sm:pb-16"
       >
         {/* Crisp Unaltered Hero Background Image */}
         <div className="absolute inset-0 z-0">
@@ -35,8 +35,8 @@ export default function Hero() {
             className="w-full h-full object-cover object-center"
           />
           {/* Subtle directional ambient scrim to balance natural light with high text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#122B2B]/85 via-[#122B2B]/45 to-transparent"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#122B2B]/60 via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#122B2B]/90 via-[#122B2B]/60 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#122B2B]/70 via-transparent to-transparent"></div>
         </div>
 
         {/* ─── Modern Luxury Hero Card (Editorial Glassmorphic Design) ──────── */}
@@ -45,17 +45,17 @@ export default function Hero() {
             initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: prefersReducedMotion ? 0.2 : 0.65, ease: 'easeOut' }}
-            className="max-w-2xl bg-[#122B2B]/80 backdrop-blur-xl p-7 sm:p-10 md:p-12 rounded-3xl border border-[#B8925A]/30 shadow-[0_20px_50px_rgba(0,0,0,0.55)]"
+            className="max-w-2xl bg-[#122B2B]/85 sm:bg-[#122B2B]/80 backdrop-blur-xl p-5 sm:p-10 md:p-12 rounded-2xl sm:rounded-3xl border border-[#B8925A]/30 shadow-[0_20px_50px_rgba(0,0,0,0.55)]"
           >
             {/* Subtitle Badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="inline-flex items-center gap-2 mb-5 px-3.5 py-1.5 rounded-full bg-[#B8925A]/15 border border-[#B8925A]/40"
+              className="inline-flex items-center gap-2 mb-4 sm:mb-5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#B8925A]/15 border border-[#B8925A]/40"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#D4A84B]" />
-              <span className="text-[11px] uppercase tracking-[0.25em] font-semibold text-[#D4A84B]">
+              <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.25em] font-semibold text-[#D4A84B]">
                 New Season Collection 2026
               </span>
             </motion.div>
@@ -65,9 +65,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: prefersReducedMotion ? 0.2 : 0.55, delay: 0.2 }}
-              className="font-serif text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.12] mb-5"
+              className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.18] sm:leading-[1.12] mb-4 sm:mb-5"
             >
-              Bring Warmth <br />
+              Bring Warmth <br className="hidden sm:inline" />
               <span className="italic font-normal text-[#F5EFE6] bg-gradient-to-r from-[#F5EFE6] via-[#E8C97A] to-[#B8925A] bg-clip-text text-transparent">
                 Into Your Space.
               </span>
@@ -78,7 +78,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: prefersReducedMotion ? 0.2 : 0.5, delay: 0.3 }}
-              className="text-sm sm:text-base md:text-lg text-[#F5EFE6]/90 font-light leading-relaxed mb-8 max-w-xl"
+              className="text-xs sm:text-base md:text-lg text-[#F5EFE6]/90 font-light leading-relaxed mb-6 sm:mb-8 max-w-xl"
             >
               Soft textures, natural timber tones, and thoughtfully designed solid wood furniture to create a home that feels calm, luxurious, and inviting.
             </motion.p>
@@ -88,12 +88,12 @@ export default function Hero() {
               initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: prefersReducedMotion ? 0.2 : 0.5, delay: 0.4 }}
-              className="flex flex-wrap items-center gap-4 pt-1"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1"
             >
               {/* Primary Button */}
               <a
                 href="#collections"
-                className="inline-flex items-center justify-center gap-3 px-7 py-3.5 sm:px-8 sm:py-4 rounded-xl bg-gradient-to-r from-[#D4A84B] via-[#B8925A] to-[#C99C53] text-[#122B2B] font-bold text-xs sm:text-sm uppercase tracking-wider hover:shadow-[0_0_25px_rgba(184,146,90,0.5)] transition-all transform hover:-translate-y-0.5 group"
+                className="inline-flex items-center justify-center gap-3 px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl bg-gradient-to-r from-[#D4A84B] via-[#B8925A] to-[#C99C53] text-[#122B2B] font-bold text-xs sm:text-sm uppercase tracking-wider hover:shadow-[0_0_25px_rgba(184,146,90,0.5)] transition-all transform hover:-translate-y-0.5 group text-center"
               >
                 <span>Explore Collection</span>
                 <ArrowRight className="w-4 h-4 text-[#122B2B] group-hover:translate-x-1 transition-transform" />
@@ -102,20 +102,20 @@ export default function Hero() {
               {/* Secondary Outline Button */}
               <a
                 href="#bespoke-builder"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-7 sm:py-4 rounded-xl border border-white/30 text-white hover:text-[#D4A84B] hover:border-[#D4A84B] hover:bg-white/5 transition-all text-xs sm:text-sm font-semibold tracking-wider uppercase"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-7 sm:py-4 rounded-xl border border-white/30 text-white hover:text-[#D4A84B] hover:border-[#D4A84B] hover:bg-white/5 transition-all text-xs sm:text-sm font-semibold tracking-wider uppercase text-center"
               >
                 <span>Bespoke Lookbook</span>
               </a>
             </motion.div>
 
             {/* Quick Micro Badges */}
-            <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center gap-6 text-[11px] text-[#F5EFE6]/75 uppercase tracking-wider font-medium">
+            <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/10 flex flex-wrap items-center gap-3 sm:gap-6 text-[10px] sm:text-[11px] text-[#F5EFE6]/75 uppercase tracking-wider font-medium">
               <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-[#B8925A]" />
+                <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#B8925A]" />
                 100% Solid Seasoned Teak
               </span>
               <span className="flex items-center gap-1.5">
-                <Award className="w-4 h-4 text-[#B8925A]" />
+                <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#B8925A]" />
                 25+ Years Legacy
               </span>
             </div>

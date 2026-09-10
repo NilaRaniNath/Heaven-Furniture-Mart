@@ -13,7 +13,6 @@ import {
   FileCheck,
   Trees,
   Layers,
-  Maximize2,
   Banknote,
   ShieldCheck
 } from 'lucide-react';
@@ -137,7 +136,7 @@ export default function BespokeBuilder() {
   return (
     <motion.section
       id="bespoke-builder"
-      className="py-28 bg-[#122B2B] text-white relative overflow-hidden"
+      className="py-16 sm:py-28 bg-[#122B2B] text-white relative overflow-hidden"
       variants={bespokeVariants}
       initial="hidden"
       whileInView="visible"
@@ -149,12 +148,12 @@ export default function BespokeBuilder() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Title */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-14">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0A1919] border border-[#B8925A]/40 text-[#B8925A] text-xs font-medium tracking-wider uppercase mb-4"
+            className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#0A1919] border border-[#B8925A]/40 text-[#B8925A] text-[10px] sm:text-xs font-medium tracking-wider uppercase mb-3 sm:mb-4"
           >
             <Sparkles className="w-3.5 h-3.5" />
             <span>Interactive Atelier Studio</span>
@@ -164,7 +163,7 @@ export default function BespokeBuilder() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4"
+            className="font-serif text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-3 sm:mb-4"
           >
             Bespoke Concept &amp; <span className="italic gold-gradient-text">Budget Calculator</span>
           </motion.h2>
@@ -173,23 +172,23 @@ export default function BespokeBuilder() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-sm sm:text-base text-white/70 font-light"
+            className="text-xs sm:text-base text-white/70 font-light"
           >
             Configure your room, preferred timber style, and size to calculate real-time estimated pricing (BDT) with 3D consultation.
           </motion.p>
         </div>
 
         {/* Step Indicator Tabs */}
-        <div className="flex items-center justify-center max-w-xl mx-auto mb-12">
+        <div className="flex items-center justify-center max-w-xl mx-auto mb-8 sm:mb-12 overflow-x-auto no-scrollbar py-1">
           {[
-            { step: 1, label: '1. Room Type' },
-            { step: 2, label: '2. Style & Timber' },
-            { step: 3, label: '3. Scale & Taka (৳)' }
+            { step: 1, label: '1. Room' },
+            { step: 2, label: '2. Style' },
+            { step: 3, label: '3. Scale & ৳' }
           ].map((item, idx) => (
             <React.Fragment key={item.step}>
               <button
                 onClick={() => setActiveStep(item.step)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
+                className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-sm font-medium whitespace-nowrap transition-all shrink-0 ${
                   activeStep === item.step
                     ? 'bg-[#B8925A] text-[#122B2B] font-semibold shadow-lg shadow-[#B8925A]/20'
                     : activeStep > item.step
@@ -200,16 +199,16 @@ export default function BespokeBuilder() {
                 <span>{item.label}</span>
               </button>
               {idx < 2 && (
-                <div className={`h-0.5 w-6 sm:w-10 mx-1 transition-colors ${activeStep > item.step ? 'bg-[#B8925A]' : 'bg-white/10'}`}></div>
+                <div className={`h-0.5 w-3 sm:w-10 mx-1 transition-colors ${activeStep > item.step ? 'bg-[#B8925A]' : 'bg-white/10'}`}></div>
               )}
             </React.Fragment>
           ))}
         </div>
 
         {/* Builder Interactive Split Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 items-start">
           {/* Left Column: Interactive Step Controls (7 Columns) */}
-          <div className="lg:col-span-7 bg-[#0A1919]/80 border border-white/10 rounded-2xl p-6 sm:p-8 backdrop-blur-md">
+          <div className="lg:col-span-7 bg-[#0A1919]/80 border border-white/10 rounded-2xl p-4 sm:p-8 backdrop-blur-md">
             <AnimatePresence mode="wait">
               {/* STEP 1: ROOM TYPE */}
               {activeStep === 1 && (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Heart, ShoppingBag, Phone, Menu, X, Sparkles, Trash2, ExternalLink } from 'lucide-react';
 import { useFavorites } from '../context/FavoritesContext';
@@ -290,17 +290,18 @@ export default function Navbar() {
             transition={{ duration: 0.25, ease: 'easeInOut' }}
             className="overflow-hidden bg-[#122B2B]/95 border-b border-[#B8925A]/25 shadow-xl backdrop-blur-lg"
           >
-            <div className="max-w-xl mx-auto relative flex items-center py-3.5 px-4">
-              <Search className="absolute left-7 w-4 h-4 text-[#B8925A]/70" />
+            <div className="max-w-xl mx-auto relative flex items-center py-3.5 px-3 sm:px-4">
+              <Search className="absolute left-6 sm:left-7 w-4 h-4 text-[#B8925A]/70" />
               <input
                 type="text"
                 autoFocus
                 placeholder="Search teak sofas, dining tables, bed sets..."
-                className="w-full bg-[#0D2020] text-white text-xs pl-10 pr-10 py-2.5 rounded-full border border-[#B8925A]/30 focus:outline-none focus:border-[#B8925A] focus:shadow-[0_0_12px_rgba(184,146,90,0.15)] transition-all placeholder:text-white/35"
+                className="w-full bg-[#0D2020] text-white text-xs pl-9 pr-9 sm:pl-10 sm:pr-10 py-2.5 rounded-full border border-[#B8925A]/30 focus:outline-none focus:border-[#B8925A] focus:shadow-[0_0_12px_rgba(184,146,90,0.15)] transition-all placeholder:text-white/35"
               />
               <button
                 onClick={() => setSearchOpen(false)}
-                className="absolute right-7 text-white/50 hover:text-white transition-colors"
+                className="absolute right-6 sm:right-7 text-white/50 hover:text-white transition-colors p-1"
+                aria-label="Close Search"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -319,15 +320,15 @@ export default function Navbar() {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="lg:hidden overflow-hidden bg-[#122B2B]/98 backdrop-blur-xl border-b border-[#B8925A]/20"
           >
-            <div className="px-6 py-7 space-y-1">
-              {navLinks.map((link, i) => (
+            <div className="px-4 sm:px-6 py-6 space-y-1">
+              {navLinks.map((link) => (
                 <Link
                   key={link.id}
                   to={link.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block py-3 px-4 rounded-xl text-base font-medium transition-all duration-200 ${
                     link.accent
-                      ? 'text-[#B8925A] font-semibold bg-[#B8925A]/8 hover:bg-[#B8925A]/15'
+                      ? 'text-[#B8925A] font-semibold bg-[#B8925A]/10 hover:bg-[#B8925A]/20 border border-[#B8925A]/20'
                       : 'text-white/85 hover:text-[#B8925A] hover:bg-white/5'
                   }`}
                 >
@@ -341,23 +342,28 @@ export default function Navbar() {
               ))}
 
               {/* Mobile utilities row */}
-              <div className="flex items-center justify-between gap-4 pt-5 mt-4 border-t border-white/10">
+              <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-4 pt-5 mt-4 border-t border-white/10">
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
                     setIsFavoritesOpen(true);
                   }}
-                  className="flex items-center gap-2 text-white/80 hover:text-[#B8925A] transition-colors p-2 text-xs font-semibold rounded-lg bg-white/5 border border-white/10"
+                  className="flex items-center gap-2 text-white/90 hover:text-[#B8925A] transition-colors px-3 py-2 text-xs font-semibold rounded-lg bg-white/5 border border-white/10"
                 >
                   <Heart className={`w-4 h-4 ${wishlistCount > 0 ? 'text-red-400 fill-red-400' : ''}`} />
                   <span>Wishlist ({wishlistCount})</span>
                 </button>
-                <a href="#bespoke-builder" className="text-white/70 hover:text-[#B8925A] transition-colors p-2">
-                  <ShoppingBag className="w-5 h-5" />
+                <a 
+                  href="#bespoke-builder" 
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-white/80 hover:text-[#B8925A] transition-colors p-2 flex items-center gap-1.5 text-xs bg-white/5 rounded-lg border border-white/10"
+                >
+                  <ShoppingBag className="w-4 h-4 text-[#B8925A]" />
+                  <span>Bag ({cartCount})</span>
                 </a>
                 <a
                   href="tel:+8801960481983"
-                  className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold border border-[#B8925A]/40 text-[#B8925A] hover:bg-[#B8925A]/10 transition-all"
+                  className="flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-semibold border border-[#B8925A]/50 text-[#B8925A] hover:bg-[#B8925A]/10 transition-all ml-auto sm:ml-0"
                 >
                   <Phone className="w-3.5 h-3.5" />
                   <span>Call Now</span>
@@ -373,7 +379,7 @@ export default function Navbar() {
     {/* ───── Favorites / Wishlist Modal / Drawer (Rendered outside header for instant popup) ───── */}
     <AnimatePresence>
       {isFavoritesOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
           {/* Dark Blur Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -389,22 +395,22 @@ export default function Navbar() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-2xl bg-[#122B2B] text-white rounded-3xl shadow-2xl border border-[#B8925A]/30 overflow-hidden z-10 my-auto flex flex-col max-h-[85vh]"
+            className="relative w-full max-w-2xl bg-[#122B2B] text-white rounded-2xl sm:rounded-3xl shadow-2xl border border-[#B8925A]/30 overflow-hidden z-10 my-auto flex flex-col max-h-[85vh]"
           >
             {/* Header */}
-            <div className="p-6 sm:p-7 border-b border-white/10 flex items-center justify-between bg-[#0D2020]">
+            <div className="p-4 sm:p-6 border-b border-white/10 flex items-center justify-between bg-[#0D2020]">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#B8925A]/15 border border-[#B8925A]/30 flex items-center justify-center text-[#B8925A]">
-                  <Heart className="w-5 h-5 fill-[#B8925A]" />
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#B8925A]/15 border border-[#B8925A]/30 flex items-center justify-center text-[#B8925A] shrink-0">
+                  <Heart className="w-4 h-4 sm:w-5 sm:h-5 fill-[#B8925A]" />
                 </div>
                 <div>
-                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
+                  <h3 className="font-serif text-lg sm:text-2xl font-bold text-white flex items-center gap-2 flex-wrap">
                     Saved Favorites
-                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#B8925A]/20 text-[#B8925A] font-sans border border-[#B8925A]/30">
+                    <span className="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-[#B8925A]/20 text-[#B8925A] font-sans border border-[#B8925A]/30">
                       {favoritedProducts.length} items
                     </span>
                   </h3>
-                  <p className="text-xs text-white/60 font-light mt-0.5">
+                  <p className="text-[11px] sm:text-xs text-white/60 font-light mt-0.5">
                     Your curated personal collection of teak furniture
                   </p>
                 </div>
@@ -412,7 +418,7 @@ export default function Navbar() {
 
               <button
                 onClick={() => setIsFavoritesOpen(false)}
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#B8925A] hover:text-[#122B2B] text-white transition-all flex items-center justify-center border border-white/15"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/10 hover:bg-[#B8925A] hover:text-[#122B2B] text-white transition-all flex items-center justify-center border border-white/15 shrink-0 ml-2"
                 aria-label="Close Favorites"
               >
                 <X className="w-4 h-4" />
@@ -420,20 +426,20 @@ export default function Navbar() {
             </div>
 
             {/* Body / Items List */}
-            <div className="p-6 overflow-y-auto space-y-4 flex-1">
+            <div className="p-4 sm:p-6 overflow-y-auto space-y-3.5 flex-1">
               {favoritedProducts.length === 0 ? (
-                <div className="py-12 text-center flex flex-col items-center justify-center">
-                  <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/30 mb-4">
-                    <Heart className="w-8 h-8" />
+                <div className="py-10 sm:py-12 text-center flex flex-col items-center justify-center">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/30 mb-3 sm:mb-4">
+                    <Heart className="w-7 h-7 sm:w-8 sm:h-8" />
                   </div>
-                  <h4 className="text-lg font-serif font-bold text-white/90 mb-1">No Favorites Yet</h4>
-                  <p className="text-xs text-white/60 max-w-sm font-light mb-6">
+                  <h4 className="text-base sm:text-lg font-serif font-bold text-white/90 mb-1">No Favorites Yet</h4>
+                  <p className="text-xs text-white/60 max-w-sm font-light mb-5">
                     Click the heart emoji on any furniture piece in our collections to save it here for quick access.
                   </p>
                   <Link
                     to="/collections"
                     onClick={() => setIsFavoritesOpen(false)}
-                    className="px-6 py-2.5 rounded-full bg-[#B8925A] text-[#122B2B] font-bold text-xs hover:bg-[#D4AF77] transition-all shadow-md"
+                    className="px-5 py-2.5 rounded-full bg-[#B8925A] text-[#122B2B] font-bold text-xs hover:bg-[#D4AF77] transition-all shadow-md"
                   >
                     Browse Collections
                   </Link>
@@ -446,11 +452,11 @@ export default function Navbar() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, x: -20 }}
-                    className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-2xl bg-[#0D2020] border border-white/10 hover:border-[#B8925A]/40 transition-all"
+                    className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#0D2020] border border-white/10 hover:border-[#B8925A]/40 transition-all"
                   >
                     {/* Product Thumbnail & Details */}
-                    <div className="flex items-center gap-4">
-                      <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0 border border-white/10">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden shrink-0 border border-white/10">
                         <img
                           src={item.image}
                           alt={item.title}
@@ -458,34 +464,34 @@ export default function Navbar() {
                         />
                       </div>
                       <div>
-                        <span className="text-[10px] uppercase tracking-wider text-[#B8925A] font-semibold">
+                        <span className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#B8925A] font-semibold">
                           {item.pieces}
                         </span>
-                        <h4 className="font-serif text-base font-bold text-white group-hover:text-[#B8925A] transition-colors">
+                        <h4 className="font-serif text-sm sm:text-base font-bold text-white group-hover:text-[#B8925A] transition-colors leading-tight">
                           {item.title}
                         </h4>
-                        <p className="text-xs text-white/60 font-light line-clamp-1 mt-0.5">
+                        <p className="text-[11px] sm:text-xs text-white/60 font-light line-clamp-1 mt-0.5">
                           {item.subtitle}
                         </p>
-                        <p className="text-[11px] text-emerald-400 font-medium mt-1">
+                        <p className="text-[10px] sm:text-[11px] text-emerald-400 font-medium mt-1">
                           {item.specs.material}
                         </p>
                       </div>
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex items-center gap-2 self-end sm:self-center w-full sm:w-auto justify-end pt-2 sm:pt-0 border-t sm:border-0 border-white/5">
+                    <div className="flex items-center gap-2 self-end sm:self-center w-full sm:w-auto justify-between sm:justify-end pt-2 sm:pt-0 border-t sm:border-0 border-white/5">
                       <Link
                         to="/#bespoke-builder"
                         onClick={() => setIsFavoritesOpen(false)}
-                        className="px-4 py-2 rounded-full bg-[#B8925A]/15 hover:bg-[#B8925A] text-[#B8925A] hover:text-[#122B2B] text-xs font-semibold border border-[#B8925A]/30 transition-all inline-flex items-center gap-1.5"
+                        className="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#B8925A]/15 hover:bg-[#B8925A] text-[#B8925A] hover:text-[#122B2B] text-xs font-semibold border border-[#B8925A]/30 transition-all inline-flex items-center gap-1.5"
                       >
                         <span>Request Quote</span>
                         <ExternalLink className="w-3 h-3" />
                       </Link>
                       <button
                         onClick={() => removeFavorite(item.id)}
-                        className="p-2 rounded-full text-white/40 hover:text-red-400 hover:bg-white/5 transition-colors"
+                        className="p-1.5 sm:p-2 rounded-full text-white/40 hover:text-red-400 hover:bg-white/5 transition-colors"
                         title="Remove item"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -498,10 +504,10 @@ export default function Navbar() {
 
             {/* Footer Actions */}
             {favoritedProducts.length > 0 && (
-              <div className="p-5 border-t border-white/10 bg-[#0D2020] flex items-center justify-between">
+              <div className="p-4 sm:p-5 border-t border-white/10 bg-[#0D2020] flex flex-col sm:flex-row items-center justify-between gap-3">
                 <button
                   onClick={clearFavorites}
-                  className="text-xs text-white/50 hover:text-red-400 transition-colors flex items-center gap-1.5 font-medium"
+                  className="text-xs text-white/50 hover:text-red-400 transition-colors flex items-center gap-1.5 font-medium self-start sm:self-auto"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                   <span>Clear All</span>
@@ -510,7 +516,7 @@ export default function Navbar() {
                 <Link
                   to="/#bespoke-builder"
                   onClick={() => setIsFavoritesOpen(false)}
-                  className="px-6 py-2.5 rounded-full bg-[#B8925A] text-[#122B2B] font-bold text-xs hover:bg-[#D4AF77] transition-all shadow-lg shadow-[#B8925A]/20"
+                  className="w-full sm:w-auto text-center px-5 py-2.5 rounded-full bg-[#B8925A] text-[#122B2B] font-bold text-xs hover:bg-[#D4AF77] transition-all shadow-lg shadow-[#B8925A]/20"
                 >
                   Customize Selected Items
                 </Link>

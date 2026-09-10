@@ -23,7 +23,7 @@ export default function FinalCTA() {
 
   return (
     <motion.section
-      className="py-24 bg-[#122B2B] text-white relative overflow-hidden border-t border-[#B8925A]/20"
+      className="py-16 sm:py-24 bg-[#122B2B] text-white relative overflow-hidden border-t border-[#B8925A]/20"
       variants={ctaVariants}
       initial="hidden"
       whileInView="visible"
@@ -38,7 +38,7 @@ export default function FinalCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.45, ease: 'easeOut' }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0A1919] border border-[#B8925A]/40 text-[#B8925A] text-xs font-semibold uppercase tracking-widest mb-6"
+          className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-[#0A1919] border border-[#B8925A]/40 text-[#B8925A] text-[10px] sm:text-xs font-semibold uppercase tracking-widest mb-4 sm:mb-6"
         >
           <Sparkles className="w-4 h-4" />
           <span>Bespoke Design Journey</span>
@@ -49,7 +49,7 @@ export default function FinalCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.55, delay: 0.08, ease: 'easeOut' }}
-          className="font-serif text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight leading-tight mb-6"
+          className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight mb-4 sm:mb-6"
         >
           Ready to Craft Your <br />
           <span className="italic gold-gradient-text">Signature Piece?</span>
@@ -60,7 +60,7 @@ export default function FinalCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.55, delay: 0.16, ease: 'easeOut' }}
-          className="text-base sm:text-lg text-white/75 font-light max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-xs sm:text-base md:text-lg text-white/75 font-light max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed"
         >
           Connect directly with our senior design team in Chattogram. Experience complimentary 3D spatial planning, wood timber selection, and transparent quote estimations.
         </motion.p>
@@ -70,13 +70,13 @@ export default function FinalCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.55, delay: 0.24, ease: 'easeOut' }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto"
+          className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 max-w-md mx-auto"
         >
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-base transition-all transform hover:-translate-y-0.5 shadow-2xl shadow-[#25D366]/30"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-sm sm:text-base transition-all transform hover:-translate-y-0.5 shadow-2xl shadow-[#25D366]/30 text-center"
           >
             <MessageCircle className="w-5 h-5 fill-current" />
             <span>Chat on WhatsApp</span>
@@ -84,7 +84,7 @@ export default function FinalCTA() {
 
           <a
             href="tel:+8801960481983"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full border border-white/20 text-white font-medium text-base hover:border-[#B8925A] hover:text-[#B8925A] transition-all backdrop-blur-sm"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 sm:py-4 rounded-full border border-white/20 text-white font-medium text-sm sm:text-base hover:border-[#B8925A] hover:text-[#B8925A] transition-all backdrop-blur-sm text-center"
           >
             <Phone className="w-4 h-4 text-[#B8925A]" />
             <span>Call Showroom</span>

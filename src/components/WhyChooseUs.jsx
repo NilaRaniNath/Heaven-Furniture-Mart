@@ -61,7 +61,7 @@ export default function WhyChooseUs() {
   return (
     <motion.section
       id="why-us"
-      className="py-24 bg-[#122B2B] text-white relative"
+      className="py-16 sm:py-24 bg-[#122B2B] text-white relative"
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
@@ -73,13 +73,13 @@ export default function WhyChooseUs() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="text-xs uppercase tracking-[0.25em] text-[#B8925A] font-semibold mb-3"
+            className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#B8925A] font-semibold mb-2 sm:mb-3"
           >
             The Distinction
           </motion.p>
@@ -88,7 +88,7 @@ export default function WhyChooseUs() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.55, delay: 0.08, ease: 'easeOut' }}
-            className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-6"
+            className="font-serif text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4 sm:mb-6"
           >
             Why Choose <span className="italic gold-gradient-text">Heaven</span>
           </motion.h2>
@@ -97,7 +97,7 @@ export default function WhyChooseUs() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.55, delay: 0.16, ease: 'easeOut' }}
-            className="text-sm sm:text-base text-white/70 font-light leading-relaxed"
+            className="text-xs sm:text-base text-white/70 font-light leading-relaxed"
           >
             From raw seasoned timber to white-glove installation in your home, experience an uncompromised standard of bespoke excellence.
           </motion.p>
@@ -105,7 +105,7 @@ export default function WhyChooseUs() {
 
         {/* 6 Trust Points Grid — staggered cards */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -118,25 +118,25 @@ export default function WhyChooseUs() {
                 key={point.title}
                 variants={itemVariants}
                 whileHover={cardHover}
-                className="group p-8 rounded-2xl bg-[#0A1919]/60 border border-white/10 hover:border-[#B8925A]/50 transition-colors duration-300 hover:shadow-2xl hover:shadow-[#B8925A]/10 flex flex-col justify-between"
+                className="group p-5 sm:p-8 rounded-2xl bg-[#0A1919]/60 border border-white/10 hover:border-[#B8925A]/50 transition-colors duration-300 hover:shadow-2xl hover:shadow-[#B8925A]/10 flex flex-col justify-between"
               >
                 <div>
                   {/* Icon Box */}
-                  <div className="w-12 h-12 rounded-xl bg-[#122B2B] border border-[#B8925A]/30 flex items-center justify-center text-[#B8925A] group-hover:scale-110 group-hover:border-[#B8925A] group-hover:bg-[#B8925A] group-hover:text-[#122B2B] transition-all duration-300 mb-6">
-                    <IconComponent className="w-6 h-6 transition-colors" />
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#122B2B] border border-[#B8925A]/30 flex items-center justify-center text-[#B8925A] group-hover:scale-110 group-hover:border-[#B8925A] group-hover:bg-[#B8925A] group-hover:text-[#122B2B] transition-all duration-300 mb-4 sm:mb-6">
+                    <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 transition-colors" />
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="font-serif text-xl font-semibold text-white mb-3 group-hover:text-[#B8925A] transition-colors">
+                  <h3 className="font-serif text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-3 group-hover:text-[#B8925A] transition-colors">
                     {point.title}
                   </h3>
-                  <p className="text-sm text-white/65 leading-relaxed font-light">
+                  <p className="text-xs sm:text-sm text-white/65 leading-relaxed font-light">
                     {point.description}
                   </p>
                 </div>
 
                 {/* Corner Accent Line */}
-                <div className="w-8 h-0.5 bg-[#B8925A]/20 group-hover:w-full group-hover:bg-[#B8925A] transition-all duration-500 mt-6"></div>
+                <div className="w-8 h-0.5 bg-[#B8925A]/20 group-hover:w-full group-hover:bg-[#B8925A] transition-all duration-500 mt-5 sm:mt-6"></div>
               </motion.div>
             );
           })}
